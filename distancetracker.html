@@ -8,11 +8,13 @@
 	
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="icon" href="globe.ico" type="image/x-icon" />
-	
+
+	<script src="distancetracker.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
 </head>
 
 <body>
-
 	<div class="wrapper" id="page-wrap">
 		
 		<!-- IF LOGGED IN -->
@@ -34,9 +36,10 @@
 			<div class="item-s" id="dest-item">
 				<h2>Enter Destination</h2>
 				<!-- ENTER JAVASCRIPT FUNCTION TO SAVE INPUT AND CALL GOOGLE API -->
-				<form action="" id="enter-dest">
-					<input type="text" class="input-field" name="dest-zip" max-length="7" size="7"><br>
-					<input type="submit" class="button" value="Calculate">
+				<!--  RUN calculate('results') ON ENTER PRESS OR FIND A WAY TO STOP SUBMIT FROM REFRESHING PAGE-->
+				<form id="enter-dest">
+					<input type="text" class="input-field" id="dest-zip" max-length="7" size="7"><br>
+					<input type="button" class="button" value="Calculate" onclick="calculate('results')">
 				</form>
 			</div>
 		</div>
@@ -57,37 +60,8 @@
 			</div>
 			<div class="item-m" id="list-item">
 				<!-- SHOW CSV FILE RESULTS INSTEAD OF STATIC TABLE -->
-				<table id="results">
-					<tr class="header">
-						<th>Name</th>
-						<th>Skills</th>
-						<th>Location</th>
-						<th>Distance</th>
-						<th>Comments</th>
-					</tr>
-					<tr>
-						<td>Edin Hodzic</td>
-						<td>Linux, Automation</td>
-						<td>Rotterdam</td>
-						<td>25km / 23 min</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Elio Brinkman</td>
-						<td>Oracle, Java</td>
-						<td>Den Haag</td>
-						<td>7km / 12 min</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>Rigo Brinkman</td>
-						<td>Linux, Java</td>
-						<td>Rotterdam</td>
-						<td>26km / 31 min</td>
-						<td></td>
-					</tr>
-				</table>
-			
+			<table id="results">
+			</table>
 		</div>	
 				
 		<!-- IF LOGGED OUT -->
@@ -95,7 +69,4 @@
 			<!-- Create login box -->
 		
 	</div>
-	
 </body>
-
-</html>

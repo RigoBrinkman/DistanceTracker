@@ -3,50 +3,55 @@
 
 <head>
 	<meta charset="utf-8">
-	
+
 	<title>Distance Tracker - Find resources nearby</title>
-	
+
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="icon" href="globe.ico" type="image/x-icon" />
 
-	<script src="distancetracker.js"></script>
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyCmhQzDCLErPCgSsp7p6PX4Uz7gWzqLijo"></script>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
 </head>
 
 <body>
 	<div class="wrapper" id="page-wrap">
-		
+
 		<!-- IF LOGGED IN -->
-		
+
 		<div class="section" id="side-bar">
-		
+
 			<div class="item-s" id="logo-item">
-				<h1><img id="logo-pic" src="globe.png" width="60px" height="60px">Distance<br>Tracker</h1>
+				<h1>
+					<img id="logo-pic" src="globe.png" width="60px" height="60px">Distance
+					<br>Tracker</h1>
 			</div>
-			
+
 			<div class="item-s" id="excel-item">
 				<h2>Upload CSV File</h2>
 				<br>
-				<input class="hide-element" id="file-select" type="file" accept=".csv, .xlsx">
+				<input class="hide-element" id="file-select" type="file" accept=".txt, .csv, .xlsx">
 				<label class="button" for="file-select">Choose File</label>
 				<!-- DO SOMETHING SMART WITH UPLOAD/READ -->
 			</div>
-			
+
 			<div class="item-s" id="dest-item">
 				<h2>Enter Destination</h2>
 				<!-- ENTER JAVASCRIPT FUNCTION TO SAVE INPUT AND CALL GOOGLE API -->
 				<!--  RUN calculate('results') ON ENTER PRESS OR FIND A WAY TO STOP SUBMIT FROM REFRESHING PAGE-->
 				<form id="enter-dest">
-					<input type="text" class="input-field" id="dest-zip" max-length="7" size="7"><br>
-					<input type="button" class="button" value="Calculate" onclick="calculate('results')">
+					<input type="text" class="input-field" id="dest-zip" max-length="7" size="7">
+					<br>
+					<input type="button" class="button" value="Calculate" onclick="calculate()">
 				</form>
 			</div>
 		</div>
-			
+
 		<div class="section" id="main">
 			<div class="item-m" id="map-item">
 				<!-- EMBED GOOGLE MAPS API -->
+				<img width=100% id="map-img">
 			</div>
 			<div class="item-m" id="filter-item">
 				<div class="item-f" id="info-box">
@@ -60,13 +65,14 @@
 			</div>
 			<div class="item-m" id="list-item">
 				<!-- SHOW CSV FILE RESULTS INSTEAD OF STATIC TABLE -->
-			<table id="results">
-			</table>
-		</div>	
-				
-		<!-- IF LOGGED OUT -->
-		
+				<table id="results">
+				</table>
+				<script src="distancetracker.js"></script>
+			</div>
+
+			<!-- IF LOGGED OUT -->
+
 			<!-- Create login box -->
-		
-	</div>
+
+		</div>
 </body>

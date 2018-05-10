@@ -1,8 +1,9 @@
 var inputZipCode = "";
-var standardZipCode = "3039ek";
+var standardZipCode = "3034CV";
 var myDistances = [];
 var sortableDistances = [];
 var table;
+var distancesAreSet;
 
 
 document.getElementById("file-select").onchange = function () {
@@ -47,7 +48,7 @@ document.getElementById("file-select").onchange = function () {
 calculate();
 
 function calculate() {
-	var srcLink = "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCmhQzDCLErPCgSsp7p6PX4Uz7gWzqLijo&size=1000x200&scale=2&markers=";
+	var srcLink = "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCmhQzDCLErPCgSsp7p6PX4Uz7gWzqLijo&size=512x150&scale=2&markers=";
 	inputZipCode = document.getElementById("dest-zip").value;
 	if (inputZipCode === "") {
 		srcLink += standardZipCode;
@@ -60,11 +61,16 @@ function calculate() {
 }
 
 function processDistances(input) {
+	if(distancesAreSet){
+		for(i in myDistances){
+			myDistances[i].innerHTML = null;
+		}
+	}
+	distancesAreSet = true;
 	var directionsService = new google.maps.DirectionsService();
 	var directionsRequest;
 	var apiResponse;
 	var counter = 1;
-	var showingDistanceToIsSet = false;
 	table.rows[0].cells[4].innerHTML = "Distance".bold();
 	for (i = 1; i < table.rows.length; i++) {
 
@@ -83,10 +89,10 @@ function processDistances(input) {
 				sortTableRows(table, counter);
 				counter++;
 				console.log(apiResponse);
-				if(!showingDistanceToIsSet){
-					document.getElementById("showingDistanceTo").append(apiResponse.routes[0].legs[0].end_address);
-					showingDistanceToIsSet = true;
-				}
+				
+				document.getElementById("showingDistanceTo").innerHTML = "Showing distance to:&nbsp";
+				document.getElementById("showingDistanceTo").append(apiResponse.routes[0].legs[0].end_address);
+				
 			}
 			else {
 				console.log("Error");

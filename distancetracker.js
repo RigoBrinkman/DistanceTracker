@@ -1,5 +1,5 @@
 var inputZipCode = "";
-var standardZipCode = "3039ek";
+var standardZipCode = "3034CV";
 var myDistances = [];
 var sortableDistances = [];
 var table;
@@ -47,7 +47,7 @@ document.getElementById("file-select").onchange = function () {
 calculate();
 
 function calculate() {
-	var srcLink = "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCmhQzDCLErPCgSsp7p6PX4Uz7gWzqLijo&size=1000x200&scale=2&markers=";
+	var srcLink = "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCmhQzDCLErPCgSsp7p6PX4Uz7gWzqLijo&size=512x150&scale=2&markers=";
 	inputZipCode = document.getElementById("dest-zip").value;
 	if (inputZipCode === "") {
 		srcLink += standardZipCode;

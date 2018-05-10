@@ -1,0 +1,6 @@
+Naam	Skills	Opmerkingen	Postcode
+Edin Hodzic	Linux, Automation		3524DL
+Elio Brinkman	Oracle, Java	Den Haag	2546BP
+Rigo Brinkman	Linux, Java	Rotterdam	3039EK
+Dummy1	Na	Na	3039EJ
+Dummy2	Na	Na	3039EL

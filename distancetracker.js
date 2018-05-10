@@ -22,7 +22,7 @@ document.getElementById("file-select").onchange = function () {
 		}
 
 		localStorage.setItem("inputData", JSON.stringify(returnArray));
-		console.log(JSON.parse(localStorage.getItem("inputData"))[1][0]);
+		console.log(JSON.parse(localStorage.getItem("inputData")));
 		table = document.getElementById("results");
 		var row;
 		var cell
@@ -30,7 +30,11 @@ document.getElementById("file-select").onchange = function () {
 			row = table.insertRow(-1);
 			for (j in returnArray[i]) {
 				cell = row.insertCell(-1);
-				cell.innerHTML = returnArray[i][j];
+				if(i == 0){
+					cell.innerHTML = returnArray[i][j].bold();
+				}else{
+					cell.innerHTML = returnArray[i][j];
+				}
 			}
 
 			myDistances[i] = row.insertCell(-1);
@@ -59,8 +63,10 @@ function processDistances(input) {
 	var directionsService = new google.maps.DirectionsService();
 	var directionsRequest;
 	var apiResponse;
-	var counter = 0;
-	for (i = 0; i < table.rows.length; i++) {
+	var counter = 1;
+	var showingDistanceToIsSet = false;
+	table.rows[0].cells[4].innerHTML = "Distance".bold();
+	for (i = 1; i < table.rows.length; i++) {
 
 		directionsRequest = {
 			origin: table.rows[i].cells[3].innerHTML,
@@ -74,31 +80,31 @@ function processDistances(input) {
 				apiResponse = response;
 
 				table.rows[counter].cells[4].innerHTML = apiResponse.routes[0].legs[0].distance.text;
-				//				sortableDistances[counter] = apiResponse.routes[0].legs[0].distance.value;
 				sortTableRows(table, counter);
 				counter++;
+				console.log(apiResponse);
+				if(!showingDistanceToIsSet){
+					document.getElementById("showingDistanceTo").append(apiResponse.routes[0].legs[0].end_address);
+					showingDistanceToIsSet = true;
+				}
 			}
 			else {
 				console.log("Error");
 			}
 		});
 	}
-	//	row.insertBefore();
 
 
 }
 
 function sortTableRows(table, rowNo) {
 	var switched = false;
-	for (i = rowNo; i <= rowNo; i++) {
-		if (i == 0) {
-			console.log("Done")
-			return;
-		}
+	for (i = rowNo; i > 1; i--) {
 		if (parseFloat(table.rows[i].cells[4].innerHTML) < parseFloat(table.rows[i - 1].cells[4].innerHTML)) {
 			console.log("switching row " + i + " and " + (i - 1));
 			table.rows[i].parentNode.insertBefore(table.rows[i], table.rows[i - 1]);
-			i -= 2;
+		}else{
+			break;
 		}
 	}
 }
